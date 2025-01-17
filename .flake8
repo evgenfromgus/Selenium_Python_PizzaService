@@ -1,0 +1,70 @@
+[flake8]
+# Максимальная длина строки (PEP8 рекомендует 79, но многие проекты используют 120)
+max-line-length = 120
+# Игнорируемые ошибки (можно добавлять/удалять по необходимости)
+ignore =
+    # E203 whitespace before ':' (конфликтует с black)
+    E203,
+    # W503 line break before binary operator (конфликтует с black)
+    W503,
+    # E266 too many leading '#' for block comment (иногда удобно для ASCII-арта)
+    E266,
+    # E501 line too long (handled by max-line-length) - дублируется, но оставлено для ясности
+    E501,
+    # E731 do not assign a lambda expression, use a def (иногда лямбды удобнее)
+    E731,
+    # D100 Missing docstring in public module (можно добавить, если нужны docstring везде)
+    D100,
+    # D104 Missing docstring in public package (можно добавить, если нужны docstring везде)
+    D104,
+    # S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+    S101
+# Список расширений
+# flake8-bugbear: находит вероятные ошибки
+# flake8-docstrings: проверяет docstrings (стиль Google по умолчанию)
+# flake8-import-order: проверяет порядок импортов
+# flake8-builtins: проверяет использование затеняющих встроенные имена переменных
+# flake8-comprehensions: помогает писать более лаконичные конструкции
+# flake8-simplify: упрощение логических выражений и прочих конструкций
+# pep8-naming: проверка именования переменных, функций и т.д. на соответствие PEP8
+# flake8-bandit: поиск уязвимостей безопасности
+plugins =
+    flake8-bugbear,
+    flake8-docstrings,
+    flake8-import-order,
+    flake8-builtins,
+    flake8-comprehensions,
+    flake8-simplify,
+    pep8-naming,
+    flake8-bandit
+# Стиль именования в pep8-naming
+# snake_case для функций, методов и атрибутов
+# PascalCase для классов
+# UPPER_CASE для констант
+# camelCase не используется
+# Можно переопределить для конкретных типов
+# [pep8-naming]
+# class-decorator-name-regex = [A-Z][a-zA-Z0-9]+
+# Стиль именования функций (snake_case)
+# function-name-regex = [a-z_][a-z0-9_]*
+# Игнорирование ошибок pep8-naming для тестов
+per-file-ignores =
+    # N801 class name '...' should use CapWords convention
+    # N802 function name '...' should be lowercase
+    # N803 argument name '...' should be lowercase
+    # N806 variable '...' in function should be lowercase
+    # N812 lowercase '...' imported as non lowercase '...'
+    # N813 camelcase '...' imported as lowercase '...'
+    # N815 mixedCase variable '...' in class scope
+    # N816 mixedCase variable '...' in global scope
+    # N818 exception name '...' should be named with an Error suffix
+    test_*.py: N801, N802, N803, N806, N812, N813, N815, N816, N818
+# Конфигурация для flake8-import-order
+import-order-style = google
+application-import-names = your_project_name # Замените на имя вашего проекта
+# Конфигурация для flake8-docstrings
+# docstring-convention = google
+# Конфигурация для flake8-bandit
+# Игнорируем B101 (assert) в тестах
+# per-file-ignores =
+#    test_*.py: B101
